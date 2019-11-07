@@ -1,0 +1,61 @@
+---
+title: "Introduction"
+---
+
+This step-by-step tutorial is a risk-free paragliding tandem flight into the
+cloud. We will guide you through the process of leveraging the cloud to analyse
+your RADseq data.
+
+For an evolutionary biologist, restriction site-associated DNA sequencing (RADseq) and new genomic
+tools are great opportunities, but the fast-changing field can be very
+challenging to follow. The most important tool for RADseq, after your brain and
+the sequencer, is your computer. RADseq analysis can be very demanding on personal
+computers, there can be not enough CPU and/or memory and the analysis can crash
+or worse, your computer is now solely dedicated to this task and nothing else.
+If you're lucky enough to have access to a large up-to-date university computer
+clusters this might be a good solution but they come with their *share* of problems.
+
+ We chose Amazon Elastic Compute Cloud (EC2) because: *(i) it's relatively easy*,
+ their's extensive documentation and big community to ask for help; *(ii) it's 
+ relatively cheap* to use machines with lots of CPU and memory. Using the cloud 
+ offers 2 more advantages:
+ 
+ 1. you can write off computer and software cost as an *operating expense* rather
+ than a capital or service expenditure (depending on countries and universities).
+ 2. you control everything: no need to ask IT to update one of the numerous
+ dependenices you'll likely required...
+
+
+**Assumptions**
+
+Although you can go through this tutorial with *copy and paste* commands, 
+knowing very basic *Terminal* commands will be useful:
+
+
+- [Reference card](http://practicalcomputing.org/files/PCfB_Appendices.pdf): quite useful to get through the jargon and main commands.
+- [Good reading](https://thoughtbot.com/blog/the-magic-behind-configure-make-make-install): to understand the basic steps to install software with the terminal.
+- Online courses: e.g. with [DataCamp](https://www.datacamp.com).
+
+**Recommendations**:
+
+In the beginning most students will feel lost and very
+intimidated by everything related to computers, software and RADseq analysis. Commonly the
+end result is that your scientific work flow is impeded. 
+If you're at the Master and PhD level and all the RADseq stuff is overwhelming
+and you're not sleeping at night, consider:
+
+- you should focus first on biology, second, on bioinformatics 
+(a computer is the main tool you'll likely use in your future) and if you have time,
+the wet-lab part. Now, don't get me wrong, I think the wet-lab is the most important
+step, but unless you want to become a wet-lab technician, my advice is
+stay away as much as humanly possible from the wet-lab and leave it to experts.
+
+- asking for help:
+    
+    * ask your director to be supervised by a PostDoc who knows the ropes in 
+    exchange for authorship on the paper(s).
+    * ask for outside help, there's a lot of sequencing facilities that now
+    offers to do the extractions, librairies, sequencing and genotyping.
+
+
+Thierry Gosselin

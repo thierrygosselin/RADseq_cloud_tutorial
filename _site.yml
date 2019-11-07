@@ -1,0 +1,8 @@
+name: "RADseq cloud tutorial"
+navbar:
+  title: '<div><img src="logo.png"></img>RADseq cloud tutorial</div>'
+  right:
+    - text: "Tutorial"
+      href: "radseq_cloud_tutorial.html"
+    - icon: fa-github fa-lg
+      href: "https://github.com/thierrygosselin"
