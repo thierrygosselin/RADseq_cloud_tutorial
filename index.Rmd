@@ -1,6 +1,11 @@
 ---
-title: "Introduction"
+title: "RADseq cloud tutorial"
 ---
+knit: (function(input_file, encoding) {
+  out_dir <- 'docs';
+  rmarkdown::render(input_file,
+ encoding=encoding,
+ output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
 
 This step-by-step tutorial is a risk-free paragliding tandem flight into the
 cloud. We will guide you through the process of leveraging the cloud to analyse
