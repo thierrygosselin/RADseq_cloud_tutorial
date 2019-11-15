@@ -657,7 +657,7 @@ nano ec2_radseq_specification.json
 **Copy/paste in the `nano` editor:**
 ```{bash eval=FALSE}
 {
-  "ImageId": "ami-09abbab8663956c8a",
+  "ImageId": "ami-0dd2ff33752f79639",
   "InstanceType": "i3.8xlarge",
   "KeyName": "radseq_keys",
   "NetworkInterfaces": [
@@ -793,7 +793,7 @@ crtl-o                                    # to write the change to the file
 crtl-x                                    # to exit nano editor
 chmod 640 /etc/passwd-s3fs                # set permissions (might need sudo)
 chown ec2-user:ec2-user /etc/passwd-s3fs  # change ownership
-s3fs -o allow_other gbs_data /media/s3/   # mount s3 bucket 'gbs_data'
+s3fs -o allow_other radseq /media/s3/   # mount s3 bucket 'radseq'
 ```
 
 **test your mounting installation:**
@@ -801,6 +801,16 @@ s3fs -o allow_other gbs_data /media/s3/   # mount s3 bucket 'gbs_data'
 sudo touch /media/s3/testing # will save the file 'testing' to your bucket
 ls -l /media/s3 # will show the content of your bucket and your testing file
 ```
+
+
+**If you plan on using RStudio**
+```{bash eval=FALSE}
+sudo chown -R ec2-user:rstudio /media/s3
+sudo chmod -R 777 /media/s3/
+# check permissions with
+ls -l /media/s3/
+```
+
 
 See [s3fs documentation](https://github.com/s3fs-fuse/s3fs-fuse/wiki/Fuse-Over-Amazon)
 
@@ -1244,7 +1254,7 @@ sudo rm /root/.s3cfg /etc/passwd-s3fs
 
 ```{bash eval=FALSE}
 # From your instance:
-sudo umount /media/s3/
+sudo umount -l /media/s3/
 sudo umount /media/ebs_1/
 sudo umount /media/ebs_2/
 sudo umount /media/ebs_3/
@@ -1272,13 +1282,13 @@ It can take several minutes to generate the image. To get the description of you
 image, use this command:
 
 ```{bash eval=FALSE}
-aws ec2 describe-images --executable-users all
+aws ec2 describe-images --owners self
 ```
 
 Write down the ami id:
 
 ```{r}
-ami="ami-09abbab8663956c8a"
+ami="ami-0dd2ff33752f79639"
 ```
 
 

@@ -12,7 +12,7 @@
 
 <meta name="author" content="Thierry Gosselin" />
 
-<meta name="date" content="2019-11-06" />
+<meta name="date" content="2019-11-15" />
 
 <title>RADseq analysis cloud tutorial</title>
 
@@ -368,7 +368,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">RADseq analysis cloud tutorial</h1>
 <h4 class="author">Thierry Gosselin</h4>
-<h4 class="date">2019-11-06</h4>
+<h4 class="date">2019-11-15</h4>
 
 </div>
 
@@ -756,7 +756,7 @@ readr::read_tsv(
 nano ec2_radseq_specification.json</code></pre>
 <p><strong>Copy/paste in the <code>nano</code> editor:</strong></p>
 <pre class="bash"><code>{
-  &quot;ImageId&quot;: &quot;ami-09abbab8663956c8a&quot;,
+  &quot;ImageId&quot;: &quot;ami-0dd2ff33752f79639&quot;,
   &quot;InstanceType&quot;: &quot;i3.8xlarge&quot;,
   &quot;KeyName&quot;: &quot;radseq_keys&quot;,
   &quot;NetworkInterfaces&quot;: [
@@ -849,10 +849,15 @@ crtl-o                                    # to write the change to the file
 crtl-x                                    # to exit nano editor
 chmod 640 /etc/passwd-s3fs                # set permissions (might need sudo)
 chown ec2-user:ec2-user /etc/passwd-s3fs  # change ownership
-s3fs -o allow_other gbs_data /media/s3/   # mount s3 bucket &#39;gbs_data&#39;</code></pre>
+s3fs -o allow_other radseq /media/s3/   # mount s3 bucket &#39;radseq&#39;</code></pre>
 <p><strong>test your mounting installation:</strong></p>
 <pre class="bash"><code>sudo touch /media/s3/testing # will save the file &#39;testing&#39; to your bucket
 ls -l /media/s3 # will show the content of your bucket and your testing file</code></pre>
+<p><strong>If you plan on using RStudio</strong></p>
+<pre class="bash"><code>sudo chown -R ec2-user:rstudio /media/s3
+sudo chmod -R 777 /media/s3/
+# check permissions with
+ls -l /media/s3/</code></pre>
 <p>See <a href="https://github.com/s3fs-fuse/s3fs-fuse/wiki/Fuse-Over-Amazon">s3fs documentation</a></p>
 <p><strong>s3 drive mount on instance reboot</strong></p>
 <ol style="list-style-type: decimal">
@@ -1151,7 +1156,7 @@ sudo chown -R ec2-user:root /media/s3</code></pre>
 <div id="unmount-drives" class="section level3">
 <h3>Unmount drives</h3>
 <pre class="bash"><code># From your instance:
-sudo umount /media/s3/
+sudo umount -l /media/s3/
 sudo umount /media/ebs_1/
 sudo umount /media/ebs_2/
 sudo umount /media/ebs_3/
@@ -1168,9 +1173,9 @@ aws ec2 stop-instances --instance-ids $instance_id</code></pre>
 aws ec2 create-image --instance-id $instance_id --name &quot;radseq&quot; --description &quot;radseq analysis image&quot;</code></pre>
 <p><a href="https://docs.aws.amazon.com/en_pv/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html">Documentation to create an Amazon EBS-backed AMI</a></p>
 <p>It can take several minutes to generate the image. To get the description of your image, use this command:</p>
-<pre class="bash"><code>aws ec2 describe-images --executable-users all</code></pre>
+<pre class="bash"><code>aws ec2 describe-images --owners self</code></pre>
 <p>Write down the ami id:</p>
-<pre class="r"><code>ami=&quot;ami-09abbab8663956c8a&quot;</code></pre>
+<pre class="r"><code>ami=&quot;ami-0dd2ff33752f79639&quot;</code></pre>
 <p>Congratulation you now have a <strong>private AMI</strong> associated with your Amazon AWS account!</p>
 <p><a href="https://docs.aws.amazon.com/en_pv/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html">Documentation</a></p>
 </div>

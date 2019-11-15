@@ -1,5 +1,5 @@
 {
-  "ImageId": "ami-09abbab8663956c8a",
+  "ImageId": "ami-0dd2ff33752f79639",
   "InstanceType": "i3.8xlarge",
   "KeyName": "radseq_keys",
   "NetworkInterfaces": [
