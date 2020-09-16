@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 <meta name="author" content="Thierry Gosselin" />
 
-<meta name="date" content="2019-11-15" />
+<meta name="date" content="2020-09-16" />
 
 <title>RADseq analysis cloud tutorial</title>
 
@@ -239,6 +238,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -267,6 +267,12 @@ $(document).ready(function () {
 }
 }
 
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
 
 .toc-content {
   padding-left: 30px;
@@ -368,7 +374,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">RADseq analysis cloud tutorial</h1>
 <h4 class="author">Thierry Gosselin</h4>
-<h4 class="date">2019-11-15</h4>
+<h4 class="date">2020-09-16</h4>
 
 </div>
 
@@ -485,7 +491,7 @@ ls -al ~ | grep profile</code></pre>
 <p>To modify, you can use <a href="http://www.barebones.com/products/bbedit/index.html">BBEdit</a> to open or make and modify hidden items (using the option <em>Show hidden items</em> on the open file screen). With Linux, use Vi! With most unix system, <code>sudo nano</code> will get the job done.</p>
 <p>After modifying your shell start up script to reload it, always run the command:</p>
 <pre class="bash"><code># Terminal
-source $HOME/.bash_profile</code></pre>
+source $HOME/.bash_profile # or ~/.bash_profile</code></pre>
 </div>
 <div id="install-amazon-command-line-tools" class="section level2">
 <h2>Install Amazon command line tools</h2>
@@ -1090,7 +1096,7 @@ sudo rm -R s3fs-fuse*</code></pre>
 <ul>
 <li>Modify the line that starts with <code>#user_allow_other</code>:</li>
 <li>Uncomment the line by removing the <code>#</code> in front of <code>user_allow_other</code></li>
-<li>Exit: <code>^x</code>, Answer <code>Y</code> to: <code>Save modified buffer? (Answering &quot;No&quot; will DISCARD changes</code> and <code>enter</code></li>
+<li>Exit: <code>^x</code>, Answer <code>Y</code> to: <code>Save modified buffer? (Answering "No" will DISCARD changes</code> and <code>enter</code></li>
 <li>Change the file permission: <code>sudo chmod 640 /etc/fuse.conf</code></li>
 </ul>
 <p>Allow s3fs to use your s3 bucket:</p>
@@ -1255,7 +1261,7 @@ vcftools # to test</code></pre>
 </div>
 <div id="plink" class="section level2">
 <h2><a href="https://www.cog-genomics.org/plink/2.0/">PLINK</a></h2>
-<pre class="bash"><code>wget http://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20191020.zip
+<pre class="bash"><code>wget http://s3.amazonaws.com/plink2-assets/plink2_linux_avx2_20200225.zip
 unzip plink2* -d plink
 sudo cp plink/plink2 /usr/local/bin/plink # password required
 sudo rm -R plink* # to remove the folder and zip file
@@ -1323,7 +1329,7 @@ sudo rm -R bcftools*</code></pre>
 </div>
 <div id="download-and-install-stacks" class="section level3">
 <h3>Download and install <a href="http://catchenlab.life.illinois.edu/stacks">stacks</a></h3>
-<pre class="bash"><code>wget http://catchenlab.life.illinois.edu/stacks/source/stacks-2.41.tar.gz # you want to use version 1.48 instead? Just change to the version number you want.
+<pre class="bash"><code>curl -L http://catchenlab.life.illinois.edu/stacks/source/stacks-2.54.tar.gz | tar xf -
 tar -xvf stacks*
 cd stacks-*
 ./configure &amp;&amp; make -j99 &amp;&amp; sudo make install
@@ -1412,7 +1418,7 @@ touch .Renviron
 sudo nano /home/ec2-user/.Renviron</code></pre>
 <p><strong>2. Inside <code>/home/ec2-user/.Renviron</code>, add these lines</strong>:</p>
 <pre class="bash"><code>PKG_CONFIG_PATH=&quot;/usr/local/lib/pkgconfig&quot;
-LD_LIBRARY_PATH=&quot;/usr/local/lib/:/usr/lib64:/usr/local/lib64/R/lib::/lib:/usr/local/lib64:/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.222.b10-0.amzn2.0.1.x86_64/jre/lib/amd64/server&quot;
+LD_LIBRARY_PATH=&quot;/usr/local/lib/:/usr/lib64:/usr/local/lib64/R/lib:/lib:/usr/local/lib64:/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.222.b10-0.amzn2.0.1.x86_64/jre/lib/amd64/server&quot;
 INCLUDE_PATH=&quot;/usr/include/sys/stat.h:/usr/include/sys/signal.h&quot;</code></pre>
 <p><strong>Save and Exit <code>nano</code> with</strong>: <code>^x</code>, answer <code>y</code>, hit <code>enter</code></p>
 <p>You could also do all this inside RStudio on your browser:</p>
@@ -1579,7 +1585,7 @@ $(document).ready(function ()  {
       theme: "bootstrap3",
       context: '.toc-content',
       hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
       },
       ignoreSelector: ".toc-ignore",
       scrollTo: 0

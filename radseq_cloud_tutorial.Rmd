@@ -228,7 +228,7 @@ With Linux, use Vi! With most unix system, `sudo nano` will get the job done.
 After modifying your shell start up script to reload it, always run the command:
 ```{bash eval=FALSE}
 # Terminal
-source $HOME/.bash_profile
+source $HOME/.bash_profile # or ~/.bash_profile
 ```
 
 
@@ -1418,7 +1418,7 @@ vcftools # to test
 ## [PLINK](https://www.cog-genomics.org/plink/2.0/)
 
 ```{bash eval=FALSE}
-wget http://s3.amazonaws.com/plink2-assets/plink2_linux_x86_64_20191020.zip
+wget http://s3.amazonaws.com/plink2-assets/plink2_linux_avx2_20200225.zip
 unzip plink2* -d plink
 sudo cp plink/plink2 /usr/local/bin/plink # password required
 sudo rm -R plink* # to remove the folder and zip file
@@ -1506,7 +1506,7 @@ sudo rm -R bcftools*
 ### Download and install [stacks](http://catchenlab.life.illinois.edu/stacks)
 
 ```{bash eval=FALSE}
-wget http://catchenlab.life.illinois.edu/stacks/source/stacks-2.41.tar.gz # you want to use version 1.48 instead? Just change to the version number you want.
+curl -L http://catchenlab.life.illinois.edu/stacks/source/stacks-2.54.tar.gz | tar xf -
 tar -xvf stacks*
 cd stacks-*
 ./configure && make -j99 && sudo make install
@@ -1656,7 +1656,7 @@ sudo nano /home/ec2-user/.Renviron
 **2. Inside `/home/ec2-user/.Renviron`, add these lines**:
 ```{bash eval=FALSE}
 PKG_CONFIG_PATH="/usr/local/lib/pkgconfig"
-LD_LIBRARY_PATH="/usr/local/lib/:/usr/lib64:/usr/local/lib64/R/lib::/lib:/usr/local/lib64:/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.222.b10-0.amzn2.0.1.x86_64/jre/lib/amd64/server"
+LD_LIBRARY_PATH="/usr/local/lib/:/usr/lib64:/usr/local/lib64/R/lib:/lib:/usr/local/lib64:/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.222.b10-0.amzn2.0.1.x86_64/jre/lib/amd64/server"
 INCLUDE_PATH="/usr/include/sys/stat.h:/usr/include/sys/signal.h"
 ```
 
